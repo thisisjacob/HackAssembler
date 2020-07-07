@@ -73,7 +73,7 @@ std::string Parser::comp() {
 		return "";
 	}
 	else if (currentLine.find(C_JMP_SPLIT) != std::string::npos) {
-		return currentLine.substr(currentLine.find(C_JMP_SPLIT) + 1, std::string::npos);
+		return currentLine.substr(0, currentLine.find(C_JMP_SPLIT));
 	}
 	else if (currentLine.find(C_DEST_SPLIT) != std::string::npos) {
 		return currentLine.substr(currentLine.find(C_DEST_SPLIT) + 1, currentLine.length());

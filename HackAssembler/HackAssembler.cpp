@@ -6,7 +6,7 @@
 
 int main()
 {
-    /*
+    
     std::cout << "Hello World!\n";
     std::ifstream* file = new std::ifstream("Fill.Asm");
 
@@ -23,7 +23,7 @@ int main()
         }
         std::cout << std::endl;
     }
-    */
+    
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
