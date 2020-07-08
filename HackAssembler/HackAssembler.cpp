@@ -4,24 +4,24 @@
 #include <fstream>
 #include "Parser.h"
 
-int main()
+int main(char* argv[])
 {
-    
-    std::cout << "Hello World!\n";
-    std::ifstream* file = new std::ifstream("Fill.Asm");
+    std::ifstream* file = new std::ifstream("Fill.asm"); // test value
+    std::ofstream output = std::ofstream("output.hack");
 
     Parser asmParser = Parser(file);
+    std::string currentLine;
     while (asmParser.hasMoreCommands()) {
         asmParser.advance();
+        if (asmParser.commandType() == Parser::CommandType::A_COMMAND) {
+
+        }
         if (asmParser.commandType() == Parser::CommandType::C_COMMAND) {
-            std::cout << asmParser.comp();
-            std::cout << asmParser.dest();
-            std::cout << asmParser.jump();
+
         }
-        if (asmParser.commandType() == Parser::CommandType::A_COMMAND || asmParser.commandType() == Parser::CommandType::L_COMMAND) {
-            std::cout << asmParser.symbol();
+        if (asmParser.commandType() == Parser::CommandType::L_COMMAND) {
+
         }
-        std::cout << std::endl;
     }
     
 }
