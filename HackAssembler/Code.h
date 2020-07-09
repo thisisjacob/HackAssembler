@@ -2,8 +2,13 @@
 #include <utility>
 #include <string>
 #include <vector>
+#include <map>
 
 static class Code {
+private:
+	std::map<std::string, std::vector<unsigned int>> destCodes;
+	std::map<std::string, std::vector<unsigned int>> compCodes;
+	std::map<std::string, std::vector<unsigned int>> jumpCodes;
 public:
 	Code();
 	// returns 3 0/1 bits representing the destination portion of a command

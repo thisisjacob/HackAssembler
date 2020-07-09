@@ -27,11 +27,16 @@ std::vector<unsigned int> Code::dest(const std::string& command) {
 	}
 }
 
-/*
-std::vector<unsigned int>& Code::comp(const std::string& command) {
 
+std::vector<unsigned int> Code::comp(const std::string& command) {
+	if (command.compare("0") == 0) {
+		return std::vector<unsigned int>{1, 0, 1, 0, 1, 0};
+	}
+	else if (command.compare("1") == 0) {
+		return std::vector<unsigned int>{1, 1, 1, 1, 1, 1};
+	}
 }
-*/
+
 
 std::vector<unsigned int> Code::jump(const std::string& command) {
 	if (command.compare("JGT") == 0) {

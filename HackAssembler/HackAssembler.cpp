@@ -3,11 +3,14 @@
 #include <iostream>
 #include <fstream>
 #include "Parser.h"
+#include "Code.h"
 
-int main(char* argv[])
+int main(int argc, char* argv[], char* envp[])
 {
-    std::ifstream* file = new std::ifstream("Fill.asm"); // test value
-    std::ofstream output = std::ofstream("output.hack");
+    std::string fileName = argv[1];
+    std::ifstream* file = new std::ifstream(fileName); // test value
+    int extensionLocation = fileName.find('.');
+    std::ofstream output = std::ofstream(fileName.substr(0, extensionLocation) + ".hack");
 
     Parser asmParser = Parser(file);
     std::string currentLine;
@@ -23,7 +26,7 @@ int main(char* argv[])
 
         }
     }
-    
+    std::cin.get();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
