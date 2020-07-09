@@ -35,6 +35,84 @@ std::vector<unsigned int> Code::comp(const std::string& command) {
 	else if (command.compare("1") == 0) {
 		return std::vector<unsigned int>{1, 1, 1, 1, 1, 1};
 	}
+	else if (command.compare("-1") == 0) {
+		return std::vector<unsigned int>{1, 1, 1, 0, 1, 0};
+	}
+	else if (command.compare("D") == 0) {
+		return std::vector<unsigned int>{0, 0, 1, 1, 0, 0};
+	}
+	else if (command.compare("A") == 0) {
+		return std::vector<unsigned int>{1, 1, 0, 0, 0, 0};
+	}
+	else if (command.compare("!D") == 0) {
+		return std::vector<unsigned int>{0, 0, 1, 1, 0, 1};
+	}
+	else if (command.compare("!A") == 0) {
+		return std::vector<unsigned int>{1, 1, 0, 0, 0, 1};
+	}
+	else if (command.compare("-D") == 0) {
+		return std::vector<unsigned int>{0, 0, 1, 1, 1, 1};
+	}
+	else if (command.compare("-A") == 0) {
+		return std::vector<unsigned int>{1, 1, 0, 0, 1, 1};
+	}
+	else if (command.compare("D+1") == 0) {
+		return std::vector<unsigned int>{0, 1, 1, 1, 1, 1};
+	}
+	else if (command.compare("A+1") == 0) {
+		return std::vector<unsigned int>{1, 1, 0, 1, 1, 1};
+	}
+	else if (command.compare("D-1") == 0) {
+		return std::vector<unsigned int>{0, 0, 1, 1, 1, 0};
+	}
+	else if (command.compare("A-1") == 0) {
+		return std::vector<unsigned int>{1, 1, 0, 0, 1, 0};
+	}
+	else if (command.compare("D+A") == 0) {
+		return std::vector<unsigned int>{0, 0, 0, 0, 1, 0};
+	}
+	else if (command.compare("D-A") == 0) {
+		return std::vector<unsigned int>{0, 1, 0, 0, 1, 1};
+	}
+	else if (command.compare("A-D") == 0) {
+		return std::vector<unsigned int>{0, 0, 0, 1, 1, 1};
+	}
+	else if (command.compare("D&A") == 0) {
+		return std::vector<unsigned int>{0, 0, 0, 0, 0, 0};
+	}
+	else if (command.compare("D|A") == 0) {
+		return std::vector<unsigned int>{0, 1, 0, 1, 0, 1};
+	}
+	else if (command.compare("M") == 0) {
+		return std::vector<unsigned int>{1, 1, 0, 0, 0, 0};
+	}
+	else if (command.compare("!M") == 0) {
+		return std::vector<unsigned int>{1, 1, 0, 0, 0, 1};
+	}
+	else if (command.compare("-M") == 0) {
+		return std::vector<unsigned int>{1, 1, 0, 0, 1, 1};
+	}
+	else if (command.compare("M+1") == 0) {
+		return std::vector<unsigned int>{1, 1, 0, 1, 1, 1};
+	}
+	else if (command.compare("M-1") == 0) {
+		return std::vector<unsigned int>{1, 1, 0, 0, 1, 0};
+	}
+	else if (command.compare("D+M") == 0) {
+		return std::vector<unsigned int>{0, 0, 0, 0, 1, 0};
+	}
+	else if (command.compare("D-M") == 0) {
+		return std::vector<unsigned int>{0, 1, 0, 0, 1, 1};
+	}
+	else if (command.compare("M-D") == 0) {
+		return std::vector<unsigned int>{0, 0, 0, 1, 1, 1};
+	}
+	else if (command.compare("D&M") == 0) {
+		return std::vector<unsigned int>{0, 0, 0, 0, 0, 0};
+	}
+	else if (command.compare("D|M") == 0) {
+		return std::vector<unsigned int>{0, 1, 0, 1, 0, 1};
+	}
 }
 
 
