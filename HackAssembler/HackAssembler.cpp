@@ -24,7 +24,7 @@ int main(int argc, char* argv[], char* envp[])
 
         }
     }
-    std::cin.get();
     file->close();
     output.close();
+    return 0;
 }
