@@ -13,14 +13,14 @@ int main(int argc, char* argv[], char* envp[])
     Parser asmParser = Parser(file);
     while (asmParser.hasMoreCommands()) {
         asmParser.advance();
-        if (asmParser.commandType() == Parser::CommandType::A_COMMAND) {
+        if (asmParser.getCurrentCommandType() == Parser::CommandType::A_COMMAND) {
             
         }
-        if (asmParser.commandType() == Parser::CommandType::C_COMMAND) {
+        else if (asmParser.getCurrentCommandType() == Parser::CommandType::C_COMMAND) {
             //binaryCode = binaryCode + Code::comp(asmParser.comp()) + Code::dest(asmParser.dest()) + Code::jump(asmParser.jump());
             output << "111" << Code::comp(asmParser.comp()) << Code::dest(asmParser.dest()) << Code::jump(asmParser.jump()) << std::endl;
         }
-        if (asmParser.commandType() == Parser::CommandType::L_COMMAND) {
+        else if (asmParser.getCurrentCommandType() == Parser::CommandType::L_COMMAND) {
 
         }
     }

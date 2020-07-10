@@ -22,6 +22,7 @@ public:
 	void advance();
 	// Command information functions
 	CommandType commandType();
+	CommandType getCurrentCommandType();
 	std::string symbol();
 	std::string dest();
 	std::string comp();

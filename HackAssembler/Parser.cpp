@@ -45,6 +45,10 @@ Parser::CommandType Parser::commandType() {
 	}
 }
 
+Parser::CommandType Parser::getCurrentCommandType() {
+	return currentCommandType;
+}
+
 std::string Parser::symbol() {
 	if (currentLine.size() == 0) {
 		return "";
