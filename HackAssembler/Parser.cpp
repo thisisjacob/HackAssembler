@@ -22,12 +22,6 @@ void Parser::advance() {
 
 
 	currentCommandType = commandType();
-
-	// skips to next command if current command is a comment and there is another command to retrieve
-	if (currentLine.size() >= 2 && currentLine[0] == '/' && currentLine[1] == '/'
-		&& hasMoreCommands()) {
-		advance();
-	}
 }
 
 Parser::CommandType Parser::commandType() {
@@ -37,7 +31,8 @@ Parser::CommandType Parser::commandType() {
 	else if (currentLine[0] == '(' && currentLine[currentLine.length() - 1] == ')') {
 		return CommandType::L_COMMAND;
 	}
-	else if (currentLine.find('/') == std::string::npos){
+	else if (currentLine.find('=') == 0 || currentLine.find(';') == 0)
+	{
 		return CommandType::C_COMMAND;
 	}
 	else {
