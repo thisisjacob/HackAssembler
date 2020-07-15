@@ -3,6 +3,8 @@
 // It must be run from the command line with an argument pointing to a [NAME].asm file
 // It then returns a file named [NAME].hack, which holds the machine code
 
+// NOTE: This program will end if there is no .asm file loaded when called, or added to the debugger
+
 #include <iostream>
 #include <fstream>
 #include <bitset>

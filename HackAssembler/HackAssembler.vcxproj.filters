@@ -24,12 +24,18 @@
     <ClCompile Include="Code.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SymbolTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Parser.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Code.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SymbolTable.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
