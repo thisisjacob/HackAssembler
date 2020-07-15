@@ -31,7 +31,7 @@ Parser::CommandType Parser::commandType() {
 	else if (currentLine[0] == '(' && currentLine[currentLine.length() - 1] == ')') {
 		return CommandType::L_COMMAND;
 	}
-	else if (currentLine.find('=') == 0 || currentLine.find(';') == 0)
+	else if (currentLine.find('=') != std::string::npos || currentLine.find(';') != std::string::npos)
 	{
 		return CommandType::C_COMMAND;
 	}
