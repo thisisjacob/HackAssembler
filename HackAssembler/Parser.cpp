@@ -20,23 +20,19 @@ void Parser::advance() {
 	currentLine.erase(remove(currentLine.begin(), currentLine.end(), '\n'), currentLine.end());
 
 
-
-	currentCommandType = commandType();
-}
-
-Parser::CommandType Parser::commandType() {
+	// sets the CommandType of the current function
 	if (currentLine[0] == '@') {
-		return CommandType::A_COMMAND;
+		currentCommandType = CommandType::A_COMMAND;
 	}
 	else if (currentLine[0] == '(' && currentLine[currentLine.length() - 1] == ')') {
-		return CommandType::L_COMMAND;
+		currentCommandType = CommandType::L_COMMAND;
 	}
 	else if (currentLine.find('=') != std::string::npos || currentLine.find(';') != std::string::npos)
 	{
-		return CommandType::C_COMMAND;
+		currentCommandType = CommandType::C_COMMAND;
 	}
 	else {
-		return CommandType::NONE;
+		currentCommandType = CommandType::NONE;
 	}
 }
 
