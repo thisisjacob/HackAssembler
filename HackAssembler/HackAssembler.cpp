@@ -34,7 +34,6 @@ int main(int argc, char* argv[], char* envp[])
             if (!symbols.contains(asmParser.symbol())) {
                 symbols.addEntry(asmParser.symbol(), romVal);
             }
-            ++romVal;
         }
         else if (asmParser.getCurrentCommandType() == Parser::CommandType::C_COMMAND) {
             ++romVal;
@@ -63,6 +62,8 @@ int main(int argc, char* argv[], char* envp[])
             else { 
                 symbols.addEntry(asmParser.symbol(), ramAddress);
                 ++ramAddress;
+                std::bitset<15> referenceBits(symbols.getAddress(asmParser.symbol()));
+                output << "0" << referenceBits << std::endl;
             }
         }
         // comp command
