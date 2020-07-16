@@ -27,14 +27,17 @@ int main(int argc, char* argv[], char* envp[])
     int romVal = 0;
     while (asmParser.hasMoreCommands()) {
         asmParser.advance();
+        // advance position in ROM if command is a variable reference
         if (asmParser.getCurrentCommandType() == Parser::CommandType::A_COMMAND) {
             ++romVal;
         }
+        // if a label pseudocommand is at this line, do not advance ROM, associate new label variable with current ROM address
         else if (asmParser.getCurrentCommandType() == Parser::CommandType::L_COMMAND) {
             if (!symbols.contains(asmParser.symbol())) {
                 symbols.addEntry(asmParser.symbol(), romVal);
             }
         }
+        // advance position in ROM if command is a computation command
         else if (asmParser.getCurrentCommandType() == Parser::CommandType::C_COMMAND) {
             ++romVal;
         }
@@ -47,26 +50,24 @@ int main(int argc, char* argv[], char* envp[])
     int ramAddress = 16;
     while (asmParser.hasMoreCommands()) {
         asmParser.advance();
+        // output a variant of a reference command
         if (asmParser.getCurrentCommandType() == Parser::CommandType::A_COMMAND) {
-            // reference to a location variable
+            // output a reference to a stored variable
             if (symbols.contains(asmParser.symbol())) {
-                std::bitset<15> referenceBits(symbols.getAddress(asmParser.symbol()));
-                output << "0" << referenceBits << std::endl;
+                output << "0" << std::bitset<15>(symbols.getAddress(asmParser.symbol())) << std::endl;
             }
             // direct reference to an address
             else if (Utilities::isStringInteger(asmParser.symbol())) {
-                std::bitset<15> referenceBits(std::stoi(asmParser.symbol()));
-                output << "0" << referenceBits << std::endl;
+                output << "0" << std::bitset<15>(std::stoi(asmParser.symbol())) << std::endl;
             }
-            // must be an undefined variable, so define it
+            // must be an undefined variable, so define it and then output its reference
             else { 
                 symbols.addEntry(asmParser.symbol(), ramAddress);
+                output << "0" << std::bitset<15>(symbols.getAddress(asmParser.symbol())) << std::endl;
                 ++ramAddress;
-                std::bitset<15> referenceBits(symbols.getAddress(asmParser.symbol()));
-                output << "0" << referenceBits << std::endl;
             }
         }
-        // comp command
+        // output comp command
         else if (asmParser.getCurrentCommandType() == Parser::CommandType::C_COMMAND) {
             output << "111" << Code::comp(asmParser.comp()) << Code::dest(asmParser.dest()) << Code::jump(asmParser.jump()) << std::endl;
         }

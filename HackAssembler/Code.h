@@ -7,7 +7,7 @@
 #include <vector>
 #include <map>
 
-static class Code {
+class Code {
 public:
 	// Converts a dest command to binary
 	// returns 3 0/1 bits representing the destination portion of a command
