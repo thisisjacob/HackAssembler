@@ -143,11 +143,13 @@
     <ClCompile Include="HackAssembler.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
+    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="SymbolTable.h" />
+    <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

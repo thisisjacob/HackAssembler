@@ -10,6 +10,8 @@
 #include <bitset>
 #include "Parser.h"
 #include "Code.h"
+#include "SymbolTable.h"
+#include "Utilities.h"
 
 int main(int argc, char* argv[], char* envp[])
 {
@@ -18,24 +20,54 @@ int main(int argc, char* argv[], char* envp[])
     std::ifstream* file = new std::ifstream(fileName); // test value
     int extensionLocation = fileName.find('.');
     std::ofstream output = std::ofstream(fileName.substr(0, extensionLocation) + ".hack");
+
+    // first run for symbol-address association
     Parser asmParser = Parser(file);
+    SymbolTable symbols = SymbolTable();
+    int romVal = 0;
+    while (asmParser.hasMoreCommands()) {
+        asmParser.advance();
+        if (asmParser.getCurrentCommandType() == Parser::CommandType::A_COMMAND) {
+            ++romVal;
+        }
+        else if (asmParser.getCurrentCommandType() == Parser::CommandType::L_COMMAND) {
+            if (!symbols.contains(asmParser.symbol())) {
+                symbols.addEntry(asmParser.symbol(), romVal);
+            }
+            ++romVal;
+        }
+        else if (asmParser.getCurrentCommandType() == Parser::CommandType::C_COMMAND) {
+            ++romVal;
+        }
+
+    }
+    file->seekg(0);
 
 
     // goes through each line of the file, converting it into machine code
+    int ramAddress = 16;
     while (asmParser.hasMoreCommands()) {
         asmParser.advance();
-        // change memory location referenced command
         if (asmParser.getCurrentCommandType() == Parser::CommandType::A_COMMAND) {
-            std::bitset<15> referenceBits(std::stoi(asmParser.symbol()));
-            output << "0" << referenceBits << std::endl;
+            // reference to a location variable
+            if (symbols.contains(asmParser.symbol())) {
+                std::bitset<15> referenceBits(symbols.getAddress(asmParser.symbol()));
+                output << "0" << referenceBits << std::endl;
+            }
+            // direct reference to an address
+            else if (Utilities::isStringInteger(asmParser.symbol())) {
+                std::bitset<15> referenceBits(std::stoi(asmParser.symbol()));
+                output << "0" << referenceBits << std::endl;
+            }
+            // must be an undefined variable, so define it
+            else { 
+                symbols.addEntry(asmParser.symbol(), ramAddress);
+                ++ramAddress;
+            }
         }
         // comp command
         else if (asmParser.getCurrentCommandType() == Parser::CommandType::C_COMMAND) {
             output << "111" << Code::comp(asmParser.comp()) << Code::dest(asmParser.dest()) << Code::jump(asmParser.jump()) << std::endl;
-        }
-        // label command
-        else if (asmParser.getCurrentCommandType() == Parser::CommandType::L_COMMAND) {
-
         }
     }
 
@@ -43,3 +75,5 @@ int main(int argc, char* argv[], char* envp[])
     output.close();
     return 0;
 }
+
+

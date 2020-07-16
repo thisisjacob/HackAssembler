@@ -8,6 +8,7 @@ private:
 	std::unordered_map<std::string, int> symbolAddressMap;
 public:
 	// Initializes an empty SymbolTable
+	// Adds the default symbols to storage
 	SymbolTable();
 	// Adds the entry symbol at the address in int
 	void addEntry(std::string symbol, int address);
